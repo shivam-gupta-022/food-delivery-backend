@@ -12,10 +12,12 @@ global.foodData = require('./db')(function call(err, data, CatData) {
 
 const express = require('express')
 const app = express()
-app.use(cors({
-  origin: 'https://playful-babka-3c6cd3.netlify.app/',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}))
+const corsOptions = {
+  origin: 'https://playful-babka-3c6cd3.netlify.app', // allow this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // allowed methods
+  credentials: true, // allow credentials
+};
+app.use(cors(corsOptions));
 const port = process.env.PORT || 4000
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
