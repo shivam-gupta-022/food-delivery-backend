@@ -1,3 +1,5 @@
+//new changes
+const cors = require('cors')
 require('dotenv').config()
 global.foodData = require('./db')(function call(err, data, CatData) {
   //  console.log(data)
@@ -6,9 +8,14 @@ global.foodData = require('./db')(function call(err, data, CatData) {
   global.foodData = data;
   global.foodCategory = CatData;
 })
+// new changes
 
 const express = require('express')
 const app = express()
+app.use(cors({
+  origin: 'https://playful-babka-3c6cd3.netlify.app/',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}))
 const port = process.env.PORT || 4000
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
